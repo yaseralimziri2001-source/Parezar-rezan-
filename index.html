@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>نڤيسينگەها مێردین</title>
+<style>
+:root{
+  --bg1:#0b1f3a; --bg2:#12335c; --card:rgba(255,255,255,.08); --card-b:rgba(255,255,255,.14);
+  --gold:#e3b04b; --gold2:#f4d58a; --text:#f5f7fb; --muted:#b9c5d9; --green:#25d366;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:"Segoe UI",Tahoma,"Noto Naskh Arabic",Arial,sans-serif;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2) 60%,#0b1f3a);
+  background-attachment:fixed;color:var(--text);min-height:100vh;
+  padding:16px 16px 110px;display:flex;justify-content:center;
+}
+.wrap{width:100%;max-width:480px}
+.top{display:flex;justify-content:center;gap:6px;margin-bottom:18px}
+.top button{
+  background:var(--card);border:1px solid var(--card-b);color:var(--muted);
+  padding:7px 14px;border-radius:999px;font-size:13px;cursor:pointer;font-family:inherit;transition:.25s
+}
+.top button.active{background:var(--gold);color:#1a1a1a;border-color:var(--gold);font-weight:700}
+.hero{text-align:center;animation:fadeUp .7s ease both}
+.avatar{
+  width:132px;height:132px;margin:0 auto 14px;position:relative;border-radius:50%;padding:4px;
+  background:conic-gradient(var(--gold),#ff7a59,#c850c0,#4158d0,#2ec4b6,var(--gold));
+  animation:spin 8s linear infinite;
+}
+.avatar-in{width:100%;height:100%;border-radius:50%;background:var(--bg1);padding:4px;animation:spinr 8s linear infinite}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:#1d3a63}
+.badge{
+  position:absolute;bottom:2px;inset-inline-end:2px;width:38px;height:38px;border-radius:50%;
+  background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:19px;
+  border:3px solid var(--bg1);animation:spinr 8s linear infinite;box-shadow:0 4px 12px rgba(0,0,0,.35)
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinr{to{transform:rotate(-360deg)}}
+h1{font-size:24px;margin-bottom:4px}
+.job{color:var(--gold2);font-size:15px;font-weight:600;margin-bottom:10px}
+.bio{color:var(--muted);font-size:14px;line-height:1.8;max-width:380px;margin:0 auto 18px}
+.phones{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:-6px 0 18px}
+.phones a{direction:ltr;unicode-bidi:isolate;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;
+  text-decoration:none;color:var(--text);font-weight:700;font-size:15px;letter-spacing:.5px;background:var(--card);
+  border:1px solid var(--gold);transition:.2s}
+.phones a:active{transform:scale(.96)}
+.social{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.btn{
+  display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:14px;text-decoration:none;
+  color:var(--text);background:var(--card);border:1px solid var(--card-b);font-size:15px;font-weight:600;
+  transition:transform .2s, background .2s;backdrop-filter:blur(6px)
+}
+.btn:active{transform:scale(.97)}
+.btn:hover{background:rgba(255,255,255,.14)}
+.btn .ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.ig .ic{background:linear-gradient(45deg,#f9a03f,#e1306c,#833ab4)}
+.wa .ic{background:var(--green)}
+.sc .ic{background:#fffc00}
+/* ستایلێ نوی یێ دوگمەیان */
+.social .btn{position:relative;overflow:hidden;border:0;padding:14px 16px;border-radius:18px;color:#fff;
+  box-shadow:0 8px 22px rgba(0,0,0,.28);justify-content:flex-start}
+.social .btn::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.22),transparent 45%);pointer-events:none}
+.social .btn .ic{width:42px;height:42px;border-radius:13px;background:rgba(255,255,255,.22);color:#fff;
+  backdrop-filter:blur(4px);position:relative}
+.social .btn .ic svg{width:24px;height:24px}
+.social .btn .lbl{flex:1;font-size:16px;font-weight:700;position:relative}
+.social .btn .arr{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;position:relative;flex:none;transition:transform .25s}
+.social .btn .arr svg{width:16px;height:16px}
+html[dir=rtl] .social .btn .arr svg{transform:scaleX(-1)}
+.social .btn:hover .arr{transform:translateX(3px)}
+html[dir=rtl] .social .btn:hover .arr{transform:translateX(-3px)}
+.social .btn.ig{background:linear-gradient(45deg,#f9a03f,#e1306c 50%,#833ab4)}
+.social .btn.wa{background:linear-gradient(135deg,#25d366,#128c7e)}
+.social .btn.sc{background:#fffc00;color:#111}
+.social .btn.sc .ic{background:rgba(0,0,0,.1);color:#111}
+.social .btn.sc .arr{background:rgba(0,0,0,.12)}
+.social .btn.sc::before{background:linear-gradient(120deg,rgba(255,255,255,.55),transparent 45%)}
+/* ستایلێ سەردەمانە: سێ تایلێن چوارگۆشە */
+.social{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.social .btn{flex-direction:column;justify-content:center;gap:10px;padding:20px 6px 14px;border-radius:24px;text-align:center;
+  transition:transform .25s,box-shadow .25s}
+.social .btn:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.35)}
+.social .btn::after{content:"";position:absolute;top:-30px;left:50%;width:100px;height:100px;margin-left:-50px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%);pointer-events:none}
+.social .btn .ic{width:56px;height:56px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4),0 6px 14px rgba(0,0,0,.22)}
+.social .btn .ic svg{width:28px;height:28px}
+.social .btn .lbl{flex:none;font-size:13.5px;letter-spacing:.2px}
+.social .btn .arr{display:none}
+.social .btn.sc .ic{background:rgba(0,0,0,.12);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15),0 6px 14px rgba(0,0,0,.15)}
+/* سناپ: ئایکۆنا گەوهەر یا مەزن */
+.social .btn.sc{background:linear-gradient(160deg,#fffc00 20%,#ffd400)}
+.social .btn.sc .ic{width:64px;height:64px;background:none;box-shadow:none;overflow:visible}
+.social .btn.sc .ic svg{width:60px;height:60px;stroke-width:1.6;
+  filter:drop-shadow(0 4px 0 rgba(0,0,0,.18)) drop-shadow(0 8px 10px rgba(0,0,0,.18));animation:ghost 3s ease-in-out infinite}
+@keyframes ghost{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-5px) rotate(3deg)}}
+.social .btn.sc .lbl{font-weight:800}
+.addr{display:flex;justify-content:center;margin:8px 0 4px}
+.addr a{display:inline-flex;align-items:center;gap:8px;color:var(--text);font-size:14px;text-decoration:none;
+  padding:10px 16px;border-radius:999px;background:var(--card);border:1px solid var(--card-b);transition:.2s}
+.addr a:active{transform:scale(.97)}
+/* ناڤنیشانا نوی */
+.addr{margin:14px 0 4px}
+.addr a{display:flex;width:100%;align-items:center;gap:14px;padding:14px 16px;border-radius:20px;text-align:start;
+  background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.05));
+  border:1px solid var(--card-b);box-shadow:0 8px 22px rgba(0,0,0,.25);position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.addr a:hover{border-color:var(--gold)}
+.addr a::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background:
+   linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) 0 0/22px 22px,
+   linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/22px 22px}
+.addr .pin{position:relative;width:52px;height:52px;border-radius:16px;flex:none;display:flex;align-items:center;justify-content:center;font-size:26px;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));box-shadow:0 6px 14px rgba(227,176,75,.35)}
+.addr .pulse{position:absolute;inset:0;border-radius:16px;border:2px solid var(--gold);animation:ping 2.2s ease-out infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.5);opacity:0}}
+.addr .atxt{flex:1;display:flex;flex-direction:column;gap:2px;position:relative;min-width:0}
+.addr .at{font-size:12px;color:var(--gold2);font-weight:700;letter-spacing:.5px}
+.addr .av{font-size:15px;font-weight:700;line-height:1.5}
+.addr .ah{font-size:12px;color:var(--muted)}
+.addr .aarr{width:32px;height:32px;border-radius:50%;background:rgba(227,176,75,.18);color:var(--gold2);display:flex;align-items:center;justify-content:center;flex:none;position:relative}
+.addr .aarr svg{width:16px;height:16px}
+html[dir=rtl] .addr .aarr svg{transform:scaleX(-1)}
+h2{font-size:17px;margin:26px 0 12px;display:flex;align-items:center;gap:8px;color:var(--gold2)}
+h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--card-b),transparent)}
+html[dir=rtl] h2::after{background:linear-gradient(270deg,var(--card-b),transparent)}
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
+.card{
+  display:flex;align-items:center;gap:14px;padding:14px;border-radius:14px;background:var(--card);
+  border:1px solid var(--card-b);opacity:0;transform:translateY(14px);animation:fadeUp .6s ease forwards
+}
+.card .ci{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,rgba(227,176,75,.25),rgba(227,176,75,.08));
+  display:flex;align-items:center;justify-content:center;font-size:23px;flex:none}
+.card .ct{font-size:15px;line-height:1.6}
+/* کارتێن کار */
+a.work{position:relative;overflow:hidden;text-decoration:none;color:var(--text);padding:14px 16px;gap:14px;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.05));
+  border:1px solid var(--card-b);box-shadow:0 8px 20px rgba(0,0,0,.22);transition:transform .2s,border-color .2s}
+a.work::before{content:"";position:absolute;top:0;bottom:0;inset-inline-start:0;width:4px;
+  background:linear-gradient(180deg,var(--gold2),var(--gold))}
+a.work:active{transform:scale(.97)}
+a.work:hover{border-color:var(--gold)}
+a.work .num{position:absolute;top:6px;inset-inline-end:12px;font-size:12px;font-weight:800;color:rgba(255,255,255,.22);letter-spacing:1px;direction:ltr}
+a.work .ci{width:52px;height:52px;border-radius:15px;font-size:26px;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));box-shadow:0 6px 14px rgba(227,176,75,.35)}
+a.work .wt{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+a.work .ct{font-size:15px;font-weight:700;line-height:1.5}
+a.work .hint{font-size:12px;color:var(--gold2);opacity:.85}
+a.work .arr{width:30px;height:30px;border-radius:50%;background:rgba(227,176,75,.18);color:var(--gold2);
+  display:flex;align-items:center;justify-content:center;flex:none;transition:transform .25s}
+a.work .arr svg{width:16px;height:16px}
+html[dir=rtl] a.work .arr svg{transform:scaleX(-1)}
+a.work:hover .arr{transform:translateX(3px)}
+html[dir=rtl] a.work:hover .arr{transform:translateX(-3px)}
+.skills{grid-template-columns:1fr 1fr}
+.skills .card{flex-direction:column;text-align:center;gap:8px;padding:16px 10px}
+.skills .ct{font-size:13.5px}
+/* کارتێن شیان */
+.skills .card{--a:#e3b04b;--b:#f4d58a;position:relative;overflow:hidden;gap:10px;padding:20px 10px 16px;border-radius:18px;
+  background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.04));
+  border:1px solid var(--card-b);box-shadow:0 8px 20px rgba(0,0,0,.22);transition:transform .25s,border-color .25s}
+.skills .card:hover{transform:translateY(-3px);border-color:var(--a)}
+.skills .card::before{content:"";position:absolute;top:-34px;left:50%;width:110px;height:110px;margin-left:-55px;border-radius:50%;
+  background:radial-gradient(circle,var(--a),transparent 70%);opacity:.28;pointer-events:none}
+.skills .card::after{content:"";position:absolute;bottom:0;left:25%;right:25%;height:3px;border-radius:3px 3px 0 0;
+  background:linear-gradient(90deg,var(--b),var(--a))}
+.skills .card:nth-child(1){--a:#ffb020;--b:#ffd978}
+.skills .card:nth-child(2){--a:#2ec4b6;--b:#8ff0e6}
+.skills .card:nth-child(3){--a:#ff7a59;--b:#ffb199}
+.skills .card:nth-child(4){--a:#4f8cff;--b:#a6c6ff}
+.skills .card:nth-child(5){--a:#c850c0;--b:#ecaae7}
+.skills .card:nth-child(6){--a:#7bd85b;--b:#c2f0ae}
+.skills .card .ci{position:relative;width:56px;height:56px;border-radius:50%;font-size:27px;
+  background:linear-gradient(135deg,var(--b),var(--a));box-shadow:0 8px 18px rgba(0,0,0,.3),0 0 0 4px rgba(255,255,255,.08)}
+.skills .card .ct{position:relative;font-weight:700;line-height:1.55}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.cta{
+  position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(0deg,var(--bg1) 60%,transparent);display:flex;justify-content:center;z-index:10
+}
+.cta a{
+  width:100%;max-width:480px;text-align:center;text-decoration:none;color:#fff;font-weight:700;font-size:16px;
+  background:var(--green);padding:15px;border-radius:16px;display:flex;justify-content:center;align-items:center;gap:10px;
+  box-shadow:0 8px 24px rgba(37,211,102,.35);animation:pulse 2.4s ease-in-out infinite
+}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.card{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top" id="langs"></div>
+  <div class="hero">
+    <div class="avatar"><div class="avatar-in"><img id="pic" alt=""></div><div class="badge" id="badge"></div></div>
+    <h1 id="name"></h1>
+    <div class="job" id="job"></div>
+    <p class="bio" id="bio"></p>
+    <div class="phones" id="phones"></div>
+  </div>
+  <div class="social" id="social"></div>
+  <div class="addr" id="addr"></div>
+  <h2 id="worksT"></h2>
+  <div class="grid" id="works"></div>
+  <h2 id="skillsT"></h2>
+  <div class="grid skills" id="skills"></div>
+</div>
+<div class="cta"><a id="cta" target="_blank" rel="noopener"></a></div>
+
+<script>
+const CONFIG = {
+  profileImage: "https://i.postimg.cc/MTG8ScQ0/d04a77b8-7ad6-4a03-a734-00842bb5e9c2.jpg",
+  instagram: "https://www.instagram.com/merdin_office?srtk=NGJ3dHdiZjlvNjE4",
+  whatsapp: "07504676116",                       // تەنێ ژمارە
+  snapchat: "https://www.snapchat.com/add/merdin_office", // نمونە - بگوهۆڕە
+  mapLink: "https://maps.app.goo.gl/jtWZtugqy7CqozsA8?g_st=ic", // لینکا ناڤنیشانێ
+  phones: ["07504676116", "07508676116"],       // ژمارێن ل بن بایۆیێ
+  badgeIcon: "📋",
+  defaultLang: "ku",
+  theme: { /* رەنگ ل CSS :root ینە */ },
+  text: {
+    ku: {
+      dir:"rtl", label:"کوردی",
+      name:"نڤيسينگەها مێردین",
+      job:"سيگورته - وەرگێران - ئەنترنێت E-sim",
+      bio:"بو پتر پێزانینا پەیوەندیێ ب مە بکەن ل سەر ڤان ژماران:",
+      address:" عێراق -دهوك -کولانا گومرکا دهوکێ", addrT:"ناڤنیشان", addrH:"ل سەر نەخشەیێ ببینە",
+      worksT:"کارێن مە", skillsT:"شیانێن مە",
+      insta:"ئینستاگرام", wa:"واتسئاپ", snap:"سناپ",
+      cta:"پەیوەندی ل گەل مە بکە"
+    },
+    ar: {
+      dir:"rtl", label:"العربية",
+      name:"مكتب مێردین",
+      job:"التأمين، الترجمة، والإنترنت عبر الشريحة الإلكترونية (eSIM)",
+      bio:"للمزيد من معلومات الاتصال يرجى التواصل معنا على الأرقام التالية:",
+      address:" العراق - دهوك - شارع جمرك دهوك", addrT:"العنوان", addrH:"افتح في الخريطة",
+      worksT:"أعمالنا", skillsT:"مهاراتنا",
+      insta:"إنستغرام", wa:"واتساب", snap:"سناب",
+      cta:"تواصل معنا"
+    },
+    en: {
+      dir:"ltr", label:"English",
+      name:"Merdin Office",
+      job:"Insurance - Translation - eSIM Internet",
+      bio:"For more contact information, please reach out to us at the following numbers:",
+      address:"Iraq - Duhok - Duhok Customs Street ", addrT:"Address", addrH:"Open in Maps",
+      worksT:"Our Work", skillsT:"Our Skills",
+      insta:"Instagram", wa:"WhatsApp", snap:"Snapchat",
+      cta:"Contact Us"
+    }
+  },
+  works: [
+    { icon:"📄", ku:"وەرگێڕانا سەنەوی ", ar:"ترجمة سنوية ", en:"Annual translation " },
+    { icon:"🛡️", ku:"سیکورتە (بیمە) بو لایێ عێراقی و تورکی", ar:"تأمين (سيكورتة) للجانبين العراقي والتركي", en:"Insurance for both the Iraqi and Turkish sides" },
+    { icon:"📋", ku:"خزمەتا لیستا سەفەرێ (لیستا ڕێڤینگان)", ar:"خدمة الليستة (قائمة الركاب)", en:"Passenger list service" },
+    { icon:"📶", ku:"ئینتەرنێتا e-SIM", ar:"إنترنت e-SIM", en:"e-SIM internet" }
+  ],
+  skills: [
+    { icon:"⚡", ku:"خزمەتا خێرا", ar:"خدمة سريعة", en:"Fast service" },
+    { icon:"✅", ku:"ڕاستی و وردی", ar:"دقة وموثوقية", en:"Accurate & reliable" },
+    { icon:"🤝", ku:"باوەری و متمانە", ar:"ثقة وأمانة", en:"Trusted & honest" },
+    { icon:"🌍", ku:"ئەزموونا عێراق و تورکیایێ", ar:"خبرة في الجانبين العراقي والتركي", en:"Iraq–Turkey experience" },
+    { icon:"💬", ku:"پشتەڤانیا بەردەوام", ar:"دعم مستمر", en:"Ongoing support" },
+    { icon:"💰", ku:"نرخێن گونجایی", ar:"أسعار مناسبة", en:"Fair prices" }
+  ]
+};
+
+(function(){
+  const $ = id => document.getElementById(id);
+  const S = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+  const ICONS = {
+    ig: `<svg ${S}><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>`,
+    wa: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.500-.7-1.700-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.6.1c-.2-.1-1-.4-1.900-1.200-.7-.6-1.200-1.400-1.300-1.600s0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4s0-.3 0-.4-.6-1.400-.8-1.900c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.200s.9 2.500 1.100 2.700c.1.2 1.800 2.800 4.400 3.900 2.600 1 2.600.7 3.100.7.5 0 1.500-.6 1.700-1.200.2-.6.2-1.100.2-1.200-.1-.1-.3-.2-.5-.3z"/></svg>`,
+    sc: `<svg viewBox="0 0 24 24" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"><path d="M12 2.6c-3.1 0-5.2 2.200-5.200 5.300v2.200c-.6.100-1.200.300-1.700.600.300.600.900.800 1.500.900-.5 1.500-1.600 2.700-3.200 3.300.4.700 1.300.900 2 1 .2.500.1 1 .6 1.100 1 .2 1.800-.3 2.800.4.9.6 1.700 1.600 3.200 1.600s2.300-1 3.200-1.600c1-.7 1.800-.2 2.800-.4.5-.1.4-.6.6-1.100.7-.1 1.600-.3 2-1-1.600-.6-2.700-1.800-3.200-3.300.6-.1 1.200-.3 1.500-.9-.5-.3-1.100-.5-1.700-.6V7.900c0-3.100-2.100-5.300-5.200-5.300z"/></svg>`,
+    arr: `<svg ${S} stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>`
+  };
+  const c = CONFIG;
+  // ژمارا واتسئاپێ -> wa.me
+  const digits = String(c.whatsapp).replace(/\D/g,"");
+  let n = digits.replace(/^0+/,"");
+  if(!n.startsWith("964")) n = "964" + n;
+  const waLink = "https://wa.me/" + n;
+
+  let lang = c.defaultLang;
+  try { const s = localStorage.getItem("lib_lang"); if(s && c.text[s]) lang = s; } catch(e){}
+
+  $("pic").src = c.profileImage;
+  $("badge").textContent = c.badgeIcon;
+  $("cta").href = waLink;
+
+  const MSG = { ku:"سلاڤ، دڤێت پرسیارێ بکەم ل سەر: ", ar:"مرحباً، أريد الاستفسار عن: ", en:"Hello, I'd like to ask about: " };
+  const HINT = { ku:"ب واتسئاپێ داخوازێ بکە", ar:"اطلب عبر واتساب", en:"Order via WhatsApp" };
+  // ژمارێن کوردی (٠١٢٣٤٥٦٧٨٩) ب تنێ دەمێ زمان کوردی بیت
+  function toLangDigits(s, L){
+    if(L !== "ku") return s;
+    return s.replace(/\d/g, d => "٠١٢٣٤٥٦٧٨٩"[d]);
+  }
+  function workCard(it, i, L){
+    const href = waLink + "?text=" + encodeURIComponent(MSG[L] + it[L]);
+    return `<a class="card work" href="${href}" target="_blank" rel="noopener" style="animation-delay:${i*0.09}s">
+      <span class="ci">${it.icon}</span>
+      <span class="wt"><span class="ct">${it[L]}</span><span class="hint">${HINT[L]}</span></span>
+      <span class="arr">${ICONS.arr}</span></a>`;
+  }
+  function card(it, i, L){
+    return `<div class="card" style="animation-delay:${i*0.08}s"><div class="ci">${it.icon}</div><div class="ct">${it[L]}</div></div>`;
+  }
+
+  function render(){
+    const t = c.text[lang];
+    document.documentElement.lang = lang === "ku" ? "ku" : lang;
+    document.documentElement.dir = t.dir;
+    document.title = t.name;
+    $("pic").alt = t.name;
+    $("name").textContent = t.name;
+    $("job").textContent = t.job;
+    $("bio").textContent = t.bio;
+    $("phones").innerHTML = c.phones.map(p => `<a href="tel:${p}">📞 <span>${p}</span></a>`).join("");
+    $("addr").innerHTML = `<a href="${c.mapLink}" target="_blank" rel="noopener">
+      <span class="pin"><span class="pulse"></span>📍</span>
+      <span class="atxt"><span class="at">${t.addrT}</span><span class="av">${t.address}</span><span class="ah">${t.addrH}</span></span>
+      <span class="aarr">${ICONS.arr}</span></a>`;
+    $("worksT").textContent = "💼 " + t.worksT;
+    $("skillsT").textContent = "⭐ " + t.skillsT;
+    $("cta").innerHTML = "<span>💬</span><span>" + t.cta + "</span>";
+    $("social").innerHTML =
+      `<a class="btn ig" href="${c.instagram}" target="_blank" rel="noopener"><span class="ic">${ICONS.ig}</span><span class="lbl">${t.insta}</span><span class="arr">${ICONS.arr}</span></a>
+       <a class="btn wa" href="${waLink}" target="_blank" rel="noopener"><span class="ic">${ICONS.wa}</span><span class="lbl">${t.wa}</span><span class="arr">${ICONS.arr}</span></a>
+       <a class="btn sc" href="${c.snapchat}" target="_blank" rel="noopener"><span class="ic">${ICONS.sc}</span><span class="lbl">${t.snap}</span><span class="arr">${ICONS.arr}</span></a>`;
+    $("works").innerHTML = c.works.map((w,i)=>workCard(w,i,lang)).join("");
+    $("skills").innerHTML = c.skills.map((s,i)=>card(s,i,lang)).join("");
+    $("langs").innerHTML = Object.keys(c.text).map(k =>
+      `<button data-l="${k}" class="${k===lang?"active":""}">${c.text[k].label}</button>`).join("");
+    document.querySelectorAll("#langs button").forEach(b => b.onclick = () => {
+      lang = b.dataset.l;
+      try{ localStorage.setItem("lib_lang", lang); }catch(e){}
+      render();
+    });
+  }
+  render();
+})();
+</script>
+</body>
+</html>
